@@ -2,14 +2,12 @@ from contextlib import asynccontextmanager
 
 import uvicorn
 from fastapi import FastAPI
-from sqlalchemy.util import await_only
 from starlette.middleware.cors import CORSMiddleware
 
 from core.configs import get_settings
 from database.manager import get_db_manager
 
 settings = get_settings()
-settings.get_info()
 db_manager = get_db_manager()
 
 @asynccontextmanager
