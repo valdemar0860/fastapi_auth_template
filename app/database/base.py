@@ -36,3 +36,14 @@ class Base(DeclarativeBase):
             for col in self.__table__.columns
         )
         return f"{self.__class__.__name__}({columns})"
+
+
+def import_models():
+    from modules.user.models.user import User
+    from modules.user.models.roles import Role
+    from modules.user.models.permissions import Permission
+
+    from modules.auth.models.audit_log import AuditLog
+    from modules.auth.models.oauth_account import OAuthAccount
+    from modules.auth.models.two_factors import TwoFactorAuth
+    from modules.auth.models.refresh_token import RefreshToken

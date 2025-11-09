@@ -5,8 +5,6 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class ApplicationSettings(BaseSettings):
-    """Налаштування застосунку."""
-
     name: str = Field(default="FastAPI Auth", description="Назва застосунку")
     version: str = Field(default="1.0.0", description="Версія застосунку")
     debug: bool = Field(default=False, description="Режим налагодження")
@@ -39,6 +37,7 @@ class DatabaseConfig(BaseModel):
     max_overflow: int = Field(default=10, description="Максимальна кількість додаткових з'єднань", ge=0)
     pool_timeout: int = Field(default=30, description="Таймаут очікування з'єднання", ge=1)
     pool_recycle: int = Field(default=3600, description="Час життя з'єднання в секундах", ge=60)
+
 
 class JWTSettings(BaseSettings):
     secret_key: Optional[str] = Field(description="Секретний ключ для JWT", default=None)
@@ -94,7 +93,7 @@ class EmailSettings(BaseModel):
 
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
-        env_file=(".env", ".env.template"),
+        env_file=(".env", ),
         case_sensitive=False,
         extra="allow",
         env_nested_delimiter="__",

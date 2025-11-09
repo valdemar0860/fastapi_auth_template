@@ -5,6 +5,7 @@ from sqlalchemy.ext.asyncio import AsyncEngine, create_async_engine, AsyncSessio
 from sqlalchemy.orm import sessionmaker
 
 from core.configs import get_settings
+from database.base import import_models
 
 
 class DatabaseManager():
@@ -72,6 +73,8 @@ class DatabaseManager():
 
     async def create_tables(self) -> None:
         from database.base import Base
+
+        import_models()
 
         async with self.engine.begin() as conn:
             await conn.run_sync(Base.metadata.create_all)
